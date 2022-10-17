@@ -76,11 +76,11 @@ WSGI_APPLICATION = "menstoreproject.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": 'django.db.backends.postgresql',
-        "NAME": 'menstoreproject',
+        "NAME": 'menstore_db',
         'USER': 'generaladmin',
-        'PASSWORD': 'Morenewpass1212',
+        'PASSWORD': 'menstoredbpass1212',
         'HOST': 'localhost',
-        'PORT': '5433',
+        'PORT': '',
     }
 }
 
