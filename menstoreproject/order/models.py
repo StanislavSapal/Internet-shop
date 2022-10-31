@@ -1,11 +1,13 @@
 from django.db import models
 
+from menstoreproject.models import TimeStampedModel
 
-class Order:
-    cart = models.ForeignKey('cart.Cart', on_delete=models.PROTECT)
-    first_name = models.CharField(max_length=50, blank=False, null=False)
-    last_name = models.CharField(max_length=50, blank=False, null=False)
-    phone = models.CharField(blank=False, null=False)
-    address = models.CharField(blank=False, null=False)
-    email = models.EmailField(blank=False, null=False)
+
+class Order(TimeStampedModel):
+    cart = models.ForeignKey('cart.Cart', on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    phone = models.CharField(blank=True)
+    address = models.CharField(blank=True)
+    email = models.EmailField(blank=True)
 
