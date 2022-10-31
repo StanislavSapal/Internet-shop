@@ -7,8 +7,8 @@ class User(AbstractUser):
         ('M', 'Male'),
         ('F', 'Female'),
     )
-    email = models.EmailField(unique=True, blank=False)
-    phone_number = models.IntegerField(unique=True)
+    email = models.EmailField(unique=True, blank=True, null=True)
+    phone_number = models.CharField(max_length=100)
     date_of_birth = models.DateField()
     gender = models.CharField(
         max_length=1, choices=GENDER_CHOICES,
