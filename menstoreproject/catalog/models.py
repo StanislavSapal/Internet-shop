@@ -23,7 +23,6 @@ class Product(models.Model):
     price = models.IntegerField()
     material = models.CharField(max_length=50, verbose_name='Матеріал')
     quantity = models.IntegerField()
-    item_code = models.IntegerField(verbose_name='Код товару')
 
     def __str__(self):
         return self.name
@@ -36,4 +35,4 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True)
-    product = models.ForeignKey('Product', on_delete=models.PROTECT,)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
