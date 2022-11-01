@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
+# some wrong code
+# some wrong code
+# some wrong code
+# some wrong code
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
