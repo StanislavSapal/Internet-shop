@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "authentication",
     "catalog",
+    "cart",
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
