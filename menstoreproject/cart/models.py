@@ -6,11 +6,11 @@ class Cart(models.Model):
         ('O', 'Open'),
         ('C', 'Closed')
     )
-    user = models.ForeignKey('User', on_delete=models.PROTECT)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
     status = models.CharField(choices=CART_STATUS_CHOICES)
 
 
 class CartItem(models.Model):
-    user = models.ForeignKey('User', on_delete=models.PROTECT)
-    cart = models.ForeignKey('Cart', on_delete=models.PROTECT)
-    quantity = models.IntegerField(default=0)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
+    quantity = models.IntegerField()
