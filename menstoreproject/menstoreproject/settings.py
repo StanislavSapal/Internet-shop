@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     "authentication",
     "catalog",
     "cart",
+    "order",
 ]
+
 
 AUTH_USER_MODEL = 'authentication.User'
 
