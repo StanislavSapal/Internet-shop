@@ -4,7 +4,7 @@ from django.db import models
 class Category(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name='Назва категорії')
     slug = models.SlugField(unique=True)
-    image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True)
+    image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True,)
     description = models.TextField(blank=True, verbose_name='Опис категорії')
 
     def __str__(self):
