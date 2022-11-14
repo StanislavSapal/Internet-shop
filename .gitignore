@@ -157,8 +157,8 @@ id_rsa
 
 
 # Static compiled JS/CSS files
-/contractors/static/css
-/contractors/static/js
+#/contractors/static/css
+#/contractors/static/js
 
 # vs code
 .editorconfig
