@@ -7,7 +7,7 @@ class Cart(models.Model):
         ('C', 'Closed')
     )
     user = models.ForeignKey('authentication.User', on_delete=models.CASCADE)
-    status = models.CharField(choices=CART_STATUS_CHOICES, max_length=50)
+    status = models.CharField(choices=CART_STATUS_CHOICES,  max_length=50)
 
 
 class CartItem(models.Model):
