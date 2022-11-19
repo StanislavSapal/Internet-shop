@@ -10,14 +10,9 @@ def index(request):
     return render(request, 'catalog/index.html')
 
 
-# class ViewProduct(DetailView):
-#     model = Product
-#     product_item = Product.objects.get(pk=product_id)
-#     template_name = 'catalog/product_detail.html'
+class ViewProduct(DetailView):
+    model = Product
+    context_object_name = 'product_item'
 
-
-def view_product(request, product_id):
-    product_item = get_object_or_404(Product, pk=product_id)
-    return render(request, 'news/view_news.html', {'product_item': product_item})
 
 

@@ -7,7 +7,11 @@
 
 {% block content %}
       <div class="media-body">
-          <h5 class="card-title">{{ product_item.title }}</h5>
-          <p class="card-text">{{ product_item.content }}</p>
+          <h5 class="card-title">{{ product_item.name }}</h5>
+          <p class="card-text">Опис: <br>{{ product_item.description }}</p>
+          <p class="card-text">Ціна: {{ product_item.price }} грн.</p>
+          <p class="card-text">Матеріал: {{ product_item.material }}</p>
       </div>
 {% endblock %}
+
+
