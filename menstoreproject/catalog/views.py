@@ -12,6 +12,3 @@ def index(request):
 class ViewProduct(DetailView):
     model = Product
     context_object_name = 'product_item'
-
-
-
