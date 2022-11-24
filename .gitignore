@@ -162,3 +162,5 @@ id_rsa
 
 # vs code
 .editorconfig
+
+media/
