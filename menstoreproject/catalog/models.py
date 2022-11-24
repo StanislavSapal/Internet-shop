@@ -8,6 +8,9 @@ class Category(models.Model):
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True,)
     description = models.TextField(blank=True, verbose_name='Опис категорії')
 
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'category_id': self.pk})
+
     def __str__(self):
         return self.title
 
