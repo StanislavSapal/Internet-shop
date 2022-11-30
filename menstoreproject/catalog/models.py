@@ -40,3 +40,9 @@ class Product(models.Model):
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('view_product', kwargs={'pk': self.pk})
+
+    def get_img(self):
+        return self.image

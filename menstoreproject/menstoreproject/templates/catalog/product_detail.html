@@ -1,17 +1,50 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
 {{ title }} :: {{ block.super }}
 {% endblock %}
 
 
 {% block content %}
-      <div class="media-body">
-          <h5 class="card-title">{{ product_item.name }}</h5>
-          <p class="card-text">Опис: <br>{{ product_item.description }}</p>
-          <p class="card-text">Ціна: {{ product_item.price }} грн.</p>
-          <p class="card-text">Матеріал: {{ product_item.material }}</p>
-      </div>
+<div class="media-body">
+    <div class="card-header">
+        <div class="container">
+            <p> Категорія: <a href="{{ product_item.category.get_absolute_url }}">{{ product_item.category }}</a></p>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div id="carouselExampleControls" class="carousel slide d-block w-75" data-ride="carousel">
+                    <div class="carousel-inner">
+
+                        {% for image_object in product_item.productimage_set.all %}
+
+                        <div class="carousel-item {% if forloop.first %} active {%endif%}">
+                            <img class="d-block w-100" src="{{ image_object.image.url }}" alt="0" >
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h3 class="card-title mb-4">{{ product_item.name }}</h3>
+                <p class="card-text mb-4">Опис: <br>{{ product_item.description }}</p>
+                <h3 class="font-weight-semi-bold mb-4"> {{ product_item.price }} грн.</h3>
+                <p class="card-text">Матеріал: {{ product_item.material }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
-
-
