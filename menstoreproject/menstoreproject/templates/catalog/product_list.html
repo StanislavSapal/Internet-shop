@@ -6,22 +6,56 @@
 
 
 {% block content %}
-    {% for item in products %}
-    <div class="card mb-3">
-        <div class="card-header">
-                Категорія: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a>
-        </div>
-        <div class="card-body">
-            <div class="media">
 
-                <div class="media-body">
-                    <h5 class="card-title">{{ item.name }}</h5>
-                    <p class="card-text">{{ item.description|safe }}</p>
-                    <p class="card-text">{{ item.price|safe }} грн.</p>
-                    <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Перейти до товару</a>
+<div class="container-fluid pt-5 pb-3">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+        <span class="bg-secondary pr-3">Featured Products</span>
+    </h2>
+    <div class="row px-xl-5">
+        {% for item in products %}
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-4">
+            <div class="product-item bg-light mb-4" style="object-fit:contain; height: 100%;">
+                <div class="card-header">
+                    Категорія: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a>
+                </div>
+                <div class="product-img position-relative overflow-hidden">
+                    <div id="carouselExampleControls" class="carousel slide d-block w-100" data-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for image_object in item.productimage_set.all %}
+
+                            <div class="carousel-item {% if forloop.first %} active {%endif%}">
+                                <img class="img-fluid w-100 " src="{{ image_object.image.url }}" alt="0"
+                                     style="object-fit:contain;
+                                       width:200px;
+                                       height:300px;">
+                            </div>
+
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                           data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                           data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center py-4 ">
+                    <a class="card-title h6 text-decoration-none p-2" href="{{ item.get_absolute_url }}">
+                        {{ item.name|truncatechars_html:45 }}
+                    </a>
+                    <h5 class="card-text mb-4">{{ item.price|safe }} грн.</h5>
+                    <a href="{{ item.get_absolute_url }}" class="btn btn-primary" style="object-fit:contain;">Перейти до
+                        товару</a>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+</div>
+
 {% endblock %}
