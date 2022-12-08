@@ -19,6 +19,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name='Назва товару')
+    slug = models.SlugField(unique=True, blank=True, null=True)
     category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категорія')
     description = models.TextField(blank=True, verbose_name='Опис товару')
     price = models.IntegerField()
@@ -26,7 +27,7 @@ class Product(models.Model):
     quantity = models.IntegerField()
 
     def get_absolute_url(self):
-        return reverse('view_product', kwargs={'pk': self.pk})
+        return reverse('view_product', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.name

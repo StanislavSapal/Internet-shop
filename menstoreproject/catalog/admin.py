@@ -5,10 +5,11 @@ from .models import *
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'category', 'description', 'price', 'material', 'quantity')
+    list_display = ('id', 'name', 'slug', 'category', 'description', 'price', 'material', 'quantity')
     list_display_links = ('id', 'name')
     list_filter = ('category',)
     search_fields = ('name', 'description')
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class CategoryAdmin(admin.ModelAdmin):
