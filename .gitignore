@@ -74,7 +74,7 @@ lib64/
 parts/
 sdist/
 var/
-!/static/*
+!/static/
 #/media/
 *.egg-info/
 .installed.cfg
@@ -162,3 +162,5 @@ id_rsa
 
 # vs code
 .editorconfig
+
+media/
