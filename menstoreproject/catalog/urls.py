@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('product/<slug:slug>/', ViewProduct.as_view(), name='view_product'),
-    path('category/<slug:category_slug>/', ProductByCategory.as_view(extra_context={'title': 'Обрана категорія'}),
-         name='category')
+    path('products/', ProductsView.as_view(), name='list_of_products'),
+    path('products/<slug:category_slug>/', ProductsView.as_view(), name='products_by_category')
 ]
 

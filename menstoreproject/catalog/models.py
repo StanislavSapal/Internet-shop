@@ -9,7 +9,7 @@ class Category(models.Model):
     description = models.TextField(blank=True, verbose_name='Опис категорії')
 
     def get_absolute_url(self):
-        return reverse('category', kwargs={'category_slug': self.slug})
+        return reverse('products_by_category', kwargs={'category_slug': self.slug})
 
     def __str__(self):
         return self.title

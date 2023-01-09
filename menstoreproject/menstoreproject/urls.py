@@ -18,11 +18,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from catalog.views import ProductList
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', ProductList.as_view(), name='home'),
     path('', include('catalog.urls')),
 ]
 
