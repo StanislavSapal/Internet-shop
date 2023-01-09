@@ -1,10 +1,6 @@
-from django.views.generic import ListView, DetailView, CreateView
-from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView
+
 from .models import *
-
-
-def index(request):
-    return render(request, 'catalog/index.html')
 
 
 class ViewProduct(DetailView):
