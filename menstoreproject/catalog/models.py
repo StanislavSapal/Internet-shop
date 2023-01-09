@@ -4,9 +4,12 @@ from django.urls import reverse
 
 class Category(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name='Назва категорії')
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=100, unique=True, db_index=True, verbose_name="URL")
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True,)
     description = models.TextField(blank=True, verbose_name='Опис категорії')
+
+    def get_absolute_url(self):
+        return reverse('products_by_category', kwargs={'category_slug': self.slug})
 
     def __str__(self):
         return self.title
