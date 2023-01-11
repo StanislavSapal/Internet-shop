@@ -28,6 +28,7 @@ class Product(models.Model):
     price = models.IntegerField()
     material = models.CharField(max_length=50, verbose_name='Матеріал')
     quantity = models.IntegerField()
+    top_seller = models.BooleanField(default=False, verbose_name='Топ продажів')
 
     def get_absolute_url(self):
         return reverse('view_product', kwargs={'slug': self.slug})
