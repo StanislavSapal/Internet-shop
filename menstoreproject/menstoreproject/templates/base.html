@@ -27,6 +27,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
 {% include 'inc/_topbar.html' %}
@@ -49,6 +50,6 @@
 
 <!-- Template Javascript -->
 <script src="{% static 'js/main.js' %}"></script>
-
+{% block extra_js %}{% endblock %}
 </body>
 </html>
