@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from .models import *
 
-# Create your views here.
+
+def cart_view(request):
+    cart = Cart.objects.all().first()
+    return render(request, 'cart/cart_detail.html', {'cart': cart})
