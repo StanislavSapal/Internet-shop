@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{ 'title' }} :: {{ 'title' }}
+{{ 'title' }}
 {% endblock %}
 
 
@@ -26,7 +26,7 @@
                                 <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Будь на
                                     стилі</h1>
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                   href="#">Shop Now</a>
+                                   href="{% url 'list_of_products' %}">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                                 <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Будь
                                     впевненим в собі</h1>
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                   href="#">Shop Now</a>
+                                   href="{% url 'list_of_products' %}">Shop Now</a>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                             <div class="p-3" style="max-width: 700px;">
                                 <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Be Man</h1>
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                   href="#">Shop Now</a>
+                                   href="{% url 'list_of_products' %}">Shop Now</a>
                             </div>
                         </div>
                     </div>
