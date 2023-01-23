@@ -3,7 +3,7 @@ from .models import *
 
 
 class CartAdmin(admin.ModelAdmin):
-    list_display = ('user', 'status')
+    list_display = ('user', 'status', 'created_at')
 
 
 class CartItemAdmin(admin.ModelAdmin):

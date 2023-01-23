@@ -20,10 +20,10 @@
                         </tr>
                     </thead>
                     <tbody class="align-middle">
-                        {% for product in cart.cartitem_set.all %}
+                        {% for cart_item in cart_items %}
                         <tr>
-                            <td class="align-middle"><img src="" alt="" style="width: 50px;"> {{ product.product.name|truncatechars_html:30 }}</td>
-                            <td class="align-middle">{{ product.product.price }} грн.</td>
+                            <td class="align-middle"><img src="" alt="" style="width: 50px;"> {{ cart_item.product.name|truncatechars_html:30 }}</td>
+                            <td class="align-middle">{{ cart_item.product.price }} грн.</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
@@ -31,7 +31,7 @@
                                         <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
+                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="{{ cart_item.quantity }}">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-primary btn-plus">
                                             <i class="fa fa-plus"></i>
@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle">$150</td>
+                            <td class="align-middle">{{ cart_item.get_total_item_price }} грн.</td>
                             <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
                         </tr>
                         {% endfor %}
@@ -70,7 +70,7 @@
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5></h5>
+                            <h5>{{ cart.price }} грн.</h5>
                         </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                     </div>
