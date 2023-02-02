@@ -14,8 +14,9 @@ class Cart(TimeStampedModel):
 
 class CartItem(TimeStampedModel):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
-    product = models.ForeignKey('catalog.Product', on_delete=models.SET_NULL, null=True, blank=True)
+    product = models.ForeignKey('catalog.Product', on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField()
 
-    def get_total_item_price(self):
+    @property
+    def total_item_price(self):
         return self.quantity * self.product.price
