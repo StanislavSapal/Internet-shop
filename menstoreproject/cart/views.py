@@ -1,3 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from django.views.generic import DetailView
+from django.db.models import F, Sum
+from .models import *
 
-# Create your views here.
+
+class CartPageView(DetailView):
+    model = Cart
+
+    def get_object(self):
+        return get_object_or_404(Cart, user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart_items'] = self.object.cartitem_set.all()
+        context['total_cart_sum'] = self.object.cartitem_set.aggregate(price_total=Sum(F('product__price') *
+                                                                                       F('quantity')))
+        return context
+
