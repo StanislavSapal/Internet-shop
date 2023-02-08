@@ -1,7 +1,14 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from django.db.models import F, Sum
+from rest_framework import viewsets
+
 from .models import *
+
+from rest_framework import permissions
+
+from .permissions import IsOwner
+from .serializers import *
 
 
 class CartPageView(DetailView):
@@ -17,3 +24,18 @@ class CartPageView(DetailView):
                                                                                        F('quantity')))
         return context
 
+
+class CartItemViewSet(viewsets.ModelViewSet):
+
+    queryset = CartItem.objects.all()
+    serializer_class = CartListSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
+
+    def perform_create(self, serializer):
+        # when a product is saved, its saved how it is the owner
+        serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        # after get all products on DB it will be filtered by its owner and return the queryset
+        owner_queryset = self.queryset.filter(owner=self.request.user)
+        return owner_queryset

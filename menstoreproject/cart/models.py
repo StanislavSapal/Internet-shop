@@ -20,3 +20,7 @@ class CartItem(TimeStampedModel):
     @property
     def total_item_price(self):
         return self.quantity * self.product.price
+
+    @property
+    def owner(self):
+        return self.cart.user 
