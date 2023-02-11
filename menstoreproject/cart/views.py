@@ -31,11 +31,4 @@ class CartItemViewSet(viewsets.ModelViewSet):
     serializer_class = CartListSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner]
 
-    def perform_create(self, serializer):
-        # when a product is saved, its saved how it is the owner
-        serializer.save(owner=self.request.user)
 
-    def get_queryset(self):
-        # after get all products on DB it will be filtered by its owner and return the queryset
-        owner_queryset = self.queryset.filter(owner=self.request.user)
-        return owner_queryset
