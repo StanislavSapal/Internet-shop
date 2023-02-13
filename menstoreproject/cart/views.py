@@ -34,10 +34,10 @@ class CartItemViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, IsOwner]
 
     def get_cart(self):
-        current_cart = Cart.objects.filter(user=self.request.user, status='O').last()
-        if current_cart == None:
+        cart = Cart.objects.filter(user=self.request.user, status='O').last()
+        if not cart:
             raise ValidationError('You have no cart. Create it first')
-        return current_cart
+        return cart
 
     def perform_create(self, serializer):
         serializer.save(cart=self.get_cart())
