@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from django.db.models import F, Sum
 from rest_framework import viewsets, status
+from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from .models import *
@@ -33,7 +34,10 @@ class CartItemViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, IsOwner]
 
     def get_cart(self):
-        return Cart.objects.get(user=self.request.user)
+        current_cart = Cart.objects.filter(user=self.request.user, status='O').last()
+        if current_cart == None:
+            raise ValidationError('You have no cart. Create it first')
+        return current_cart
 
     def perform_create(self, serializer):
         serializer.save(cart=self.get_cart())

@@ -3,5 +3,5 @@ from .models import User
 
 
 @admin.register(User)
-class CartUser(admin.ModelAdmin):
+class User(admin.ModelAdmin):
     list_display = ('id', 'username', 'email', 'first_name', 'last_name')
