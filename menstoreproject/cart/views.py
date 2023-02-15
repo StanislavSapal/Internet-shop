@@ -1,7 +1,16 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from django.db.models import F, Sum
+from rest_framework import viewsets, status
+from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+
 from .models import *
+
+from rest_framework import permissions
+
+from .permissions import IsOwner
+from .serializers import *
 
 
 class CartPageView(DetailView):
@@ -17,3 +26,18 @@ class CartPageView(DetailView):
                                                                                        F('quantity')))
         return context
 
+
+class CartItemViewSet(viewsets.ModelViewSet):
+
+    queryset = CartItem.objects.all()
+    serializer_class = CartListSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
+
+    def get_cart(self):
+        cart = Cart.objects.filter(user=self.request.user, status='O').last()
+        if not cart:
+            raise ValidationError('You have no cart. Create it first')
+        return cart
+
+    def perform_create(self, serializer):
+        serializer.save(cart=self.get_cart())
