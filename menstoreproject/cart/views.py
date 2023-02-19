@@ -17,10 +17,7 @@ class CartPageView(DetailView):
     model = Cart
 
     def get_object(self):
-        cart = Cart.objects.filter(user=self.request.user, status='O').last()
-        if not cart:
-            raise ValidationError('You have no cart. Create it first')
-        return cart
+        return get_object_or_404(Cart, user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
