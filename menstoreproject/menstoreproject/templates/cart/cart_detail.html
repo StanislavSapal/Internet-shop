@@ -21,7 +21,7 @@
                     </thead>
                     <tbody class="align-middle">
                         {% for cart_item in cart_items %}
-                        <tr>
+                        <tr id="{{ cart_item.id }}">
                             <td class="align-middle"><img src="" alt="" style="width: 50px;"> {{ cart_item.product.name|truncatechars_html:30 }}</td>
                             <td class="align-middle">{{ cart_item.product.price }} грн.</td>
                             <td class="align-middle">
@@ -40,7 +40,7 @@
                                 </div>
                             </td>
                             <td class="align-middle">{{ cart_item.total_item_price }} грн.</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                            <td class="align-middle"><button class="btn btn-sm btn-danger delete_button"><i class="fa fa-times"></i></button></td>
                         </tr>
                         {% endfor %}
                     </tbody>
