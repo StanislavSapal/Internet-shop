@@ -1,9 +1,8 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from django.db.models import F, Sum
-from rest_framework import viewsets, status
+from rest_framework import viewsets, mixins
 from rest_framework.exceptions import ValidationError
-from rest_framework.response import Response
 
 from .models import *
 
@@ -27,7 +26,10 @@ class CartPageView(DetailView):
         return context
 
 
-class CartItemViewSet(viewsets.ModelViewSet):
+class CartItemViewSet(viewsets.GenericViewSet,
+                      mixins.ListModelMixin,
+                      mixins.UpdateModelMixin,
+                      mixins.DestroyModelMixin):
 
     queryset = CartItem.objects.all()
     serializer_class = CartListSerializer
