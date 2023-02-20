@@ -17,8 +17,8 @@ $(document).ready(function() {
     }
 
     $('button[class*=delete_button]').click(function() {
-        let url = '/api/v1/cartitems/'
-        let cart_item = $(this).parent().parent()
+        let url = '/api/v1/cartitems/';
+        let cart_item = $(this).parent().parent();
         let cart_item_id = cart_item.attr('id');
         $.ajax({
             url: url + cart_item_id + '/',
@@ -39,17 +39,12 @@ $(document).ready(function() {
     });
 
     $('button[class*=minus_button]').click(function() {
-        let url = '/api/v1/cartitems/'
-        let cart_item = $(this).closest('tr')
+        let url = '/api/v1/cartitems/';
+        let cart_item = $(this).closest('tr');
         let cart_item_id = cart_item.attr('id');
-        console.log(cart_item_id)
         let cart_item_quantity = cart_item.find('input.quantity_input');
-        console.log(cart_item_quantity);
         let cart_item_quantity_value = Number(cart_item_quantity.attr('value'));
-        console.log(cart_item_quantity_value);
         let new_quantity = cart_item_quantity_value - 1;
-        console.log(new_quantity)
-        console.log(typeof new_quantity)
         let data = JSON.stringify({'quantity': new_quantity});
 
         $.ajax({
@@ -62,7 +57,7 @@ $(document).ready(function() {
             contentType:'application/json',
             dataType: 'json',
             error: function(result){
-                console.log(result)
+                alert(result)
             },
             success: function(result) {
                 cart_item_quantity.attr('value', new_quantity);
@@ -71,16 +66,12 @@ $(document).ready(function() {
     });
 
     $('button[class*=plus_button]').click(function() {
-        let url = '/api/v1/cartitems/'
-        let cart_item = $(this).closest('tr')
+        let url = '/api/v1/cartitems/';
+        let cart_item = $(this).closest('tr');
         let cart_item_id = cart_item.attr('id');
-        console.log(cart_item_id)
         let cart_item_quantity = cart_item.find('input.quantity_input');
-        console.log(cart_item_quantity);
         let cart_item_quantity_value = Number(cart_item_quantity.attr('value'));
-        console.log(cart_item_quantity_value);
         let new_quantity = cart_item_quantity_value + 1;
-        console.log(new_quantity);
         let data = JSON.stringify({'quantity': new_quantity});
 
         $.ajax({
@@ -93,7 +84,7 @@ $(document).ready(function() {
             contentType:'application/json',
             dataType: 'json',
             error: function(result){
-                console.log(result)
+                alert(result)
             },
             success: function(result) {
                 cart_item_quantity.attr('value', new_quantity)
