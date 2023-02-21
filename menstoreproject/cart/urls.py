@@ -1,10 +1,10 @@
 from django.urls import path, include
 from .views import *
-
 from rest_framework import routers
 
 router = routers.SimpleRouter()
 router.register(r'cartitems', CartItemViewSet)
+router.register(r'cart', CartViewSet)
 
 urlpatterns = [
     path('cart/', CartPageView.as_view(), name='cart'),

@@ -1,13 +1,8 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
-from django.db.models import F, Sum
 from rest_framework import viewsets, mixins
 from rest_framework.exceptions import ValidationError
-
-from .models import *
-
 from rest_framework import permissions
-
 from .permissions import IsOwner
 from .serializers import *
 
@@ -15,7 +10,7 @@ from .serializers import *
 class CartPageView(DetailView):
     model = Cart
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         return get_object_or_404(Cart, user=self.request.user)
 
     def get_context_data(self, **kwargs):
@@ -26,10 +21,9 @@ class CartPageView(DetailView):
         return context
 
 
-class CartItemViewSet(viewsets.GenericViewSet,
-                      mixins.ListModelMixin,
-                      mixins.UpdateModelMixin,
-                      mixins.DestroyModelMixin):
+class CartItemViewSet(mixins.UpdateModelMixin,
+                      mixins.DestroyModelMixin,
+                      viewsets.GenericViewSet):
 
     queryset = CartItem.objects.all()
     serializer_class = CartListSerializer
@@ -43,3 +37,8 @@ class CartItemViewSet(viewsets.GenericViewSet,
 
     def perform_create(self, serializer):
         serializer.save(cart=self.get_cart())
+
+
+class CartViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import F, Sum
 from menstoreproject.models import TimeStampedModel
 
 
@@ -10,6 +10,10 @@ class Cart(TimeStampedModel):
     )
     user = models.ForeignKey('authentication.User', on_delete=models.CASCADE)
     status = models.CharField(choices=CART_STATUS_CHOICES,  max_length=50)
+
+    @property
+    def total_cart_sum(self):
+        return self.cartitem_set.aggregate(price_total=Sum(F('product__price') * F('quantity')))
 
 
 class CartItem(TimeStampedModel):

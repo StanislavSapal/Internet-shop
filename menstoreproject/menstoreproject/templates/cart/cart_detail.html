@@ -19,11 +19,11 @@
                             <th>Remove</th>
                         </tr>
                     </thead>
-                    <tbody class="align-middle">
+                    <tbody class="align-middle" id="{{ object.id }}">
                         {% for cart_item in cart_items %}
                         <tr id="{{ cart_item.id }}">
                             <td class="align-middle"><img src="" alt="" style="width: 50px;"> {{ cart_item.product.name|truncatechars_html:30 }}</td>
-                            <td class="align-middle">{{ cart_item.product.price }} грн.</td>
+                            <td class="align-middle price_td">{{ cart_item.product.price }} грн.</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="align-middle">{{ cart_item.total_item_price }} грн.</td>
+                            <td class="align-middle total_item_price_td">{{ cart_item.total_item_price }} грн.</td>
                             <td class="align-middle"><button class="btn btn-sm btn-danger delete_button"><i class="fa fa-times"></i></button></td>
                         </tr>
                         {% endfor %}
@@ -70,7 +70,7 @@
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>{{ total_cart_sum.price_total }} грн.</h5>
+                            <h5 class="total_cart_sum_h">{{ total_cart_sum.price_total }} грн.</h5>
                         </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                     </div>
