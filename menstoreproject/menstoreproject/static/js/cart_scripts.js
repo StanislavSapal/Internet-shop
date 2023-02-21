@@ -65,9 +65,7 @@ $(document).ready(function() {
             success: function(response) {
                 total_cart_sum_field.html(response.total_cart_sum.price_total + ' грн.');
             },
-            error: function(response) {
-                console.log(response);
-            }
+            error: function() {}
         });
     };
 

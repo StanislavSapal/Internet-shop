@@ -10,7 +10,7 @@ from .serializers import *
 class CartPageView(DetailView):
     model = Cart
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         return get_object_or_404(Cart, user=self.request.user)
 
     def get_context_data(self, **kwargs):
