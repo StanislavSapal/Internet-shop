@@ -1,11 +1,8 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
-
-from rest_framework import viewsets, mixins, generics
+from rest_framework import viewsets, mixins
 from rest_framework.exceptions import ValidationError
-
 from rest_framework import permissions
-
 from .permissions import IsOwner
 from .serializers import *
 
@@ -24,10 +21,9 @@ class CartPageView(DetailView):
         return context
 
 
-class CartItemViewSet(viewsets.GenericViewSet,
-                      mixins.ListModelMixin,
-                      mixins.UpdateModelMixin,
-                      mixins.DestroyModelMixin):
+class CartItemViewSet(mixins.UpdateModelMixin,
+                      mixins.DestroyModelMixin,
+                      viewsets.GenericViewSet):
 
     queryset = CartItem.objects.all()
     serializer_class = CartListSerializer
@@ -43,13 +39,6 @@ class CartItemViewSet(viewsets.GenericViewSet,
         serializer.save(cart=self.get_cart())
 
 
-class CartViewSet(mixins.RetrieveModelMixin, generics.GenericAPIView):
+class CartViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-
-    @classmethod
-    def get_extra_actions(cls):
-        return []
