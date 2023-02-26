@@ -9,64 +9,62 @@
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-lg-7">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Ваші дані та адреса</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Ваші дані та адреса</span>
+                </h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label for="id_first_name">Ім'я</label>
-                            <input class="form-control" type="text" name="first_name" placeholder="Валерій" required id="id_first_name">
+                            <input class="form-control" type="text" name="first_name" placeholder="Валерій" required
+                                   id="id_first_name">
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_last_name">Прізвище</label>
-                            <input class="form-control" type="text" name="last_name" placeholder="Круть" required id="id_last_name">
+                            <input class="form-control" type="text" name="last_name" placeholder="Круть" required
+                                   id="id_last_name">
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_phone">Ваш номер телефону</label>
-                            <input class="form-control" type="text" name="phone" placeholder="+380" required id="id_phone">
+                            <input class="form-control" type="text" name="phone" placeholder="+380" required
+                                   id="id_phone">
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_email">E-mail</label>
-                            <input class="form-control" type="text" name="email" placeholder="example@email.com" required id="id_email">
+                            <input class="form-control" type="text" name="email" placeholder="example@email.com"
+                                   required id="id_email">
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_town">Місто</label>
-                            <input class="form-control" type="text" name="town" placeholder="Київ" required id="id_town">
+                            <input class="form-control" type="text" name="town" placeholder="Київ" required
+                                   id="id_town">
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_region">Область</label>
-                            <input class="form-control" type="text" name="region" placeholder="Київська" required id="id_region">
+                            <input class="form-control" type="text" name="region" placeholder="Київська" required
+                                   id="id_region">
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_address">Адреса</label>
-                            <input class="form-control" type="text" name="address" placeholder="Вулиця, номер будинку, номер квартири" required id="id_address">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="newaccount">
-                                <label class="custom-control-label" for="newaccount">Create an account</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="shipto">
-                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
-                            </div>
+                            <input class="form-control" type="text" name="address"
+                                   placeholder="Вулиця, номер будинку, номер квартири" required id="id_address">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5">
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Підсумок замовлення</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Підсумок замовлення</span>
+                </h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom">
                         <div hidden class="col-md-6 form-group">
                             <label for="id_cart">Cart</label>
-                            <input value="{{ object.id }}" class="form-control" type="text" name="cart" required id="id_cart">
+                            <input value="{{ object.id }}" class="form-control" type="text" name="cart" required
+                                   id="id_cart">
                         </div>
                         <h6 class="mb-3">Products</h6>
                         {% for cart_item in cart_items %}
                         <div class="d-flex justify-content-between">
-                            <p >{{ cart_item.product.name|truncatechars_html:50}}</p>
+                            <p>{{ cart_item.product.name|truncatechars_html:50}}</p>
                             <p>{{ cart_item.product.price }} грн.</p>
                         </div>
                         {% endfor %}
@@ -74,42 +72,14 @@
                     <div class="border-bottom pt-3 pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Разом</h6>
-                            <h6>{{ total_cart_sum.price_total }}</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
-                        </div>
-                    </div>
-                    <div class="pt-2">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5>Total</h5>
-                            <h5>$160</h5>
+                            <h6>{{ total_cart_sum.price_total }} грн.</h6>
                         </div>
                     </div>
                 </div>
                 <div class="mb-5">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
                     <div class="bg-light p-30">
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Paypal</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                                <label class="custom-control-label" for="directcheck">Direct Check</label>
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                                <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                        <button type="submit" class="btn btn-block btn-primary font-weight-bold py-3">Place Order
+                        </button>
                     </div>
                 </div>
             </div>
