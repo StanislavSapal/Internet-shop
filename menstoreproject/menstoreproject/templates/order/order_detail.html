@@ -3,9 +3,8 @@
 
 {% block content %}
 
-<form action="{% url 'checkout_page' %}" method="post">
+<form action="{% url 'checkout' %}" method="post">
     {% csrf_token %}
-
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-lg-7">
@@ -13,40 +12,42 @@
                 </h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="row">
+                        {{ form.non_field.errors }}
                         <div class="col-md-6 form-group">
-                            <label for="id_first_name">Ім'я</label>
-                            <input class="form-control" type="text" name="first_name" placeholder="Валерій" required
-                                   id="id_first_name">
+                            <label for="first_name">Ім'я</label>
+                            {{ form.first_name }}
+                            {{ form.first_name.errors }}
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_last_name">Прізвище</label>
-                            <input class="form-control" type="text" name="last_name" placeholder="Круть" required
-                                   id="id_last_name">
+                            {{ form.last_name }}
+                            {{ form.last_name.errors }}
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_phone">Ваш номер телефону</label>
-                            <input class="form-control" type="text" name="phone" placeholder="+380" required
-                                   id="id_phone">
+                            <input value="+380" class="form-control" type="tel" name="phone" pattern="[\+]\d{2}\d{3}\d{3}\d{2}\d{2}" minlength="13"
+                                   maxlength="13" required id="id_phone">
+                            {{ form.phone.errors }}
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_email">E-mail</label>
-                            <input class="form-control" type="text" name="email" placeholder="example@email.com"
-                                   required id="id_email">
+                            {{ form.email }}
+                            {{ form.email.errors }}
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_town">Місто</label>
-                            <input class="form-control" type="text" name="town" placeholder="Київ" required
-                                   id="id_town">
+                            {{ form.town }}
+                            {{ form.town.errors }}
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_region">Область</label>
-                            <input class="form-control" type="text" name="region" placeholder="Київська" required
-                                   id="id_region">
+                            {{ form.region }}
+                            {{ form.region.errors }}
                         </div>
                         <div class="col-md-6 form-group">
                             <label for="id_address">Адреса</label>
-                            <input class="form-control" type="text" name="address"
-                                   placeholder="Вулиця, номер будинку, номер квартири" required id="id_address">
+                            {{ form.address }}
+                            {{ form.address.errors }}
                         </div>
                     </div>
                 </div>
@@ -57,11 +58,12 @@
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom">
                         <div hidden class="col-md-6 form-group">
-                            <label for="id_cart">Cart</label>
-                            <input value="{{ object.id }}" class="form-control" type="text" name="cart" required
+                            <label for="form.cart.id_for_label">Cart</label>
+                            <input value="{{ cart.id }}" class="form-control" type="text" name="cart" required
                                    id="id_cart">
+                            {{ form.cart.errors }}
                         </div>
-                        <h6 class="mb-3">Products</h6>
+                        <h6 class="mb-3">Товари в замовленні</h6>
                         {% for cart_item in cart_items %}
                         <div class="d-flex justify-content-between">
                             <p>{{ cart_item.product.name|truncatechars_html:50}}</p>
