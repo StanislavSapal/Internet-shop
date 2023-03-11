@@ -73,7 +73,6 @@ $(document).ready(function() {
         let url = '/api/v1/cartitems/';
         let cart_item = $(this).closest('tr');
         let cart_item_id = cart_item.attr('id');
-        console.log(cart_item_id)
         let cart_item_quantity = cart_item.find('input.quantity_input');
         let cart_item_quantity_value = Number(cart_item_quantity.attr('value'));
         let new_quantity = cart_item_quantity_value - 1;

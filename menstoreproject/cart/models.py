@@ -4,12 +4,12 @@ from menstoreproject.models import TimeStampedModel
 
 
 class Cart(TimeStampedModel):
-    CART_STATUS_CHOICES = (
-        ('O', 'Open'),
-        ('C', 'Closed')
-    )
+    class StatusChoices(models.TextChoices):
+        OPEN = 'Open'
+        CLOSED = 'Closed'
+
     user = models.ForeignKey('authentication.User', on_delete=models.CASCADE)
-    status = models.CharField(choices=CART_STATUS_CHOICES,  max_length=50)
+    status = models.CharField(max_length=10, choices=StatusChoices.choices, default=StatusChoices.OPEN)
 
     @property
     def total_cart_sum(self):
