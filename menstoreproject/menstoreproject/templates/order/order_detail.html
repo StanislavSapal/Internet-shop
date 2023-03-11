@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form action="{% url 'checkout' %}" method="post">
+    {% csrf_token %}
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-7">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Ваші дані та адреса</span>
+                </h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="row">
+                        {{ form.non_field.errors }}
+                        <div class="col-md-6 form-group">
+                            <label for="first_name">Ім'я</label>
+                            {{ form.first_name }}
+                            {{ form.first_name.errors }}
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="id_last_name">Прізвище</label>
+                            {{ form.last_name }}
+                            {{ form.last_name.errors }}
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="id_phone">Ваш номер телефону</label>
+                            <input value="+380" class="form-control" type="tel" name="phone" pattern="[\+]\d{2}\d{3}\d{3}\d{2}\d{2}" minlength="13"
+                                   maxlength="13" required id="id_phone">
+                            {{ form.phone.errors }}
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="id_email">E-mail</label>
+                            {{ form.email }}
+                            {{ form.email.errors }}
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="id_town">Місто</label>
+                            {{ form.town }}
+                            {{ form.town.errors }}
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="id_region">Область</label>
+                            {{ form.region }}
+                            {{ form.region.errors }}
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="id_address">Адреса</label>
+                            {{ form.address }}
+                            {{ form.address.errors }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Підсумок замовлення</span>
+                </h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="border-bottom">
+                        <div hidden class="col-md-6 form-group">
+                            <label for="form.cart.id_for_label">Cart</label>
+                            <input value="{{ cart.id }}" class="form-control" type="text" name="cart" required
+                                   id="id_cart">
+                            {{ form.cart.errors }}
+                        </div>
+                        <h6 class="mb-3">Товари в замовленні</h6>
+                        {% for cart_item in cart_items %}
+                        <div class="d-flex justify-content-between">
+                            <p>{{ cart_item.product.name|truncatechars_html:50}}</p>
+                            <p>{{ cart_item.product.price }} грн.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="border-bottom pt-3 pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Разом</h6>
+                            <h6>{{ total_cart_sum.price_total }} грн.</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <div class="bg-light p-30">
+                        <button type="submit" class="btn btn-block btn-primary font-weight-bold py-3">Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,5 +1,4 @@
 from django.db import models
-
 from menstoreproject.models import TimeStampedModel
 
 
@@ -8,6 +7,8 @@ class Order(TimeStampedModel):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone = models.CharField(blank=True, max_length=50)
-    address = models.CharField(blank=True, max_length=250)
+    town = models.CharField(max_length=250)
+    region = models.CharField(max_length=250)
+    address = models.CharField(max_length=250)
     email = models.EmailField(blank=True)
 

@@ -17,10 +17,9 @@ $(document).ready(function() {
     }
 
 
-
     $('button[class*=delete_button]').click(function() {
         let url = '/api/v1/cartitems/';
-        let cart_item = $(this).parent().parent();
+        let cart_item = $(this).closest('tr');
         let cart_item_id = cart_item.attr('id');
         $.ajax({
             url: url + cart_item_id + '/',
@@ -35,6 +34,7 @@ $(document).ready(function() {
                 alert('Error')
             },
             success: function(result) {
+                changeTotalCartSum(cart_item);
                 $(cart_item).remove()
             }
         });
