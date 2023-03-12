@@ -30,9 +30,9 @@ class CartItemViewSet(mixins.UpdateModelMixin,
     permission_classes = [permissions.IsAuthenticated, IsOwner]
 
     def get_cart(self):
-        cart = Cart.objects.filter(user=self.request.user, status='O').last()
+        cart = self.request.cart
         if not cart:
-            raise ValidationError('You have no cart. Create it first')
+            raise ValidationError("You don't have cart. Create it first")
         return cart
 
     def perform_create(self, serializer):

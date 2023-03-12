@@ -12,7 +12,7 @@ class OrderConfirmationView(FormView):
     raise_exception = False
 
     def get_cart(self):
-        return Cart.objects.filter(user=self.request.user, status=Cart.StatusChoices.OPEN).last()
+        return self.request.cart
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
