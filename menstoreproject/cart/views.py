@@ -11,7 +11,7 @@ class CartPageView(DetailView):
     model = Cart
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Cart, user=self.request.user)
+        return self.request.cart
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
