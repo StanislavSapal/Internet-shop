@@ -1,4 +1,11 @@
 from .models import Cart
+from django.utils.functional import SimpleLazyObject
+
+
+def get_cart(user):
+    cart = Cart.objects.filter(user=user, status=Cart.StatusChoices.OPEN).last()
+    print('finding of a cart')
+    return cart
 
 
 class CartMiddleware:
@@ -7,14 +14,18 @@ class CartMiddleware:
 
     def __call__(self, request):
         if request.user.is_authenticated:
-            cart = Cart.objects.filter(user=request.user, status=Cart.StatusChoices.OPEN).last()
-            if cart:
-                request.cart = cart
+            if hasattr(request, 'cart'):
+                response = self.get_response(request)
+                return response
             else:
-                cart = Cart(user=request.user)
-                cart.save()
-                request.cart = cart
+                cart = SimpleLazyObject(lambda: get_cart(request.user))
+                if cart:
+                    request.cart = cart
+                else:
+                    cart = Cart(user=request.user)
+                    cart.save()
+                    request.cart = cart
         else:
-            request.cart = None
+            pass
         response = self.get_response(request)
         return response
