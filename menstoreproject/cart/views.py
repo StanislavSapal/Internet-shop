@@ -1,7 +1,5 @@
-from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from rest_framework import viewsets, mixins
-from rest_framework.exceptions import ValidationError
 from rest_framework import permissions
 from .permissions import IsOwner
 from .serializers import *
@@ -11,7 +9,7 @@ class CartPageView(DetailView):
     model = Cart
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Cart, user=self.request.user)
+        return self.request.cart
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,14 +27,8 @@ class CartItemViewSet(mixins.UpdateModelMixin,
     serializer_class = CartListSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner]
 
-    def get_cart(self):
-        cart = Cart.objects.filter(user=self.request.user, status='O').last()
-        if not cart:
-            raise ValidationError('You have no cart. Create it first')
-        return cart
-
     def perform_create(self, serializer):
-        serializer.save(cart=self.get_cart())
+        serializer.save(cart=self.request.cart)
 
 
 class CartViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
