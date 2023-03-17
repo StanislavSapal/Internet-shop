@@ -4,7 +4,6 @@ from django.utils.functional import SimpleLazyObject
 
 def get_cart(user):
     cart = Cart.objects.filter(user=user, status=Cart.StatusChoices.OPEN).last()
-    print('finding of a cart')
     return cart
 
 

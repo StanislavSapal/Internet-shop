@@ -1,6 +1,5 @@
 from django.views.generic import DetailView
 from rest_framework import viewsets, mixins
-from rest_framework.exceptions import ValidationError
 from rest_framework import permissions
 from .permissions import IsOwner
 from .serializers import *
@@ -28,14 +27,8 @@ class CartItemViewSet(mixins.UpdateModelMixin,
     serializer_class = CartListSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner]
 
-    def get_cart(self):
-        cart = self.request.cart
-        if not cart:
-            raise ValidationError("You don't have cart. Create it first")
-        return cart
-
     def perform_create(self, serializer):
-        serializer.save(cart=self.get_cart())
+        serializer.save(cart=self.request.cart)
 
 
 class CartViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
