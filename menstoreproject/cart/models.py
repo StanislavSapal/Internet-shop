@@ -8,8 +8,9 @@ class Cart(TimeStampedModel):
         OPEN = 'Open'
         CLOSED = 'Closed'
 
-    user = models.ForeignKey('authentication.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('authentication.User', on_delete=models.CASCADE, blank=True, null=True)
     status = models.CharField(max_length=10, choices=StatusChoices.choices, default=StatusChoices.OPEN)
+    token = models.CharField(blank=True, null=True, max_length=16)
 
     @property
     def total_cart_sum(self):
