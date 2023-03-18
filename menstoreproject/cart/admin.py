@@ -4,7 +4,7 @@ from .models import *
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'status', 'created', 'token')
+    list_display = ('id', 'user', 'status', 'created')
 
 
 @admin.register(CartItem)

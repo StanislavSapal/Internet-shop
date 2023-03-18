@@ -14,6 +14,19 @@ def generate_token():
     return token
 
 
+def get_cart_by_token(token):
+    cart = Cart.objects.get(token=token, status=Cart.StatusChoices.OPEN)
+    return cart
+
+
+def create_new_cart(request):
+    new_token = generate_token()
+    request.session['token'] = new_token
+    cart = Cart(token=new_token)
+    cart.save()
+    return cart
+
+
 class CartMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -25,28 +38,17 @@ class CartMiddleware:
                 return response
             else:
                 cart = SimpleLazyObject(lambda: get_cart(request.user))
-                if cart:
-                    request.cart = cart
-                else:
+                if not cart:
                     cart = Cart(user=request.user)
                     cart.save()
-                    request.cart = cart
+                request.cart = cart
         else:
             if request.session.get('token'):
-                cart = Cart.objects.get(token=request.session['token'])
-                if cart.status == Cart.StatusChoices.OPEN:
-                    request.cart = cart
-                else:
-                    new_token = generate_token()
-                    request.session['token'] = new_token
-                    cart = Cart(token=new_token)
-                    cart.save()
-                    request.cart = cart
+                cart = SimpleLazyObject(lambda: get_cart_by_token(request.session['token']))
+                if not cart:
+                    cart = create_new_cart(request)
             else:
-                new_token = generate_token()
-                request.session['token'] = new_token
-                cart = Cart(token=new_token)
-                cart.save()
-                request.cart = cart
+                cart = create_new_cart(request)
+            request.cart = cart
         response = self.get_response(request)
         return response
