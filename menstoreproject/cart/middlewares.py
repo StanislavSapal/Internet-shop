@@ -4,7 +4,7 @@ import random
 import string
 
 
-def get_cart(user):
+def get_cart_by_user(user):
     cart = Cart.objects.filter(user=user, status=Cart.StatusChoices.OPEN).last()
     return cart
 
@@ -19,7 +19,7 @@ def get_cart_by_token(token):
     return cart
 
 
-def create_new_cart(request):
+def create_cart_for_anonymous_user(request):
     new_token = generate_token()
     request.session['token'] = new_token
     cart = Cart(token=new_token)
@@ -37,7 +37,7 @@ class CartMiddleware:
                 response = self.get_response(request)
                 return response
             else:
-                cart = SimpleLazyObject(lambda: get_cart(request.user))
+                cart = SimpleLazyObject(lambda: get_cart_by_user(request.user))
                 if not cart:
                     cart = Cart(user=request.user)
                     cart.save()
@@ -46,9 +46,9 @@ class CartMiddleware:
             if request.session.get('token'):
                 cart = SimpleLazyObject(lambda: get_cart_by_token(request.session['token']))
                 if not cart:
-                    cart = create_new_cart(request)
+                    cart = create_cart_for_anonymous_user(request)
             else:
-                cart = create_new_cart(request)
+                cart = create_cart_for_anonymous_user(request)
             request.cart = cart
         response = self.get_response(request)
         return response
