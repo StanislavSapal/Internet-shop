@@ -19,7 +19,8 @@ class CartPageView(DetailView):
         return context
 
 
-class CartItemViewSet(mixins.UpdateModelMixin,
+class CartItemViewSet(mixins.CreateModelMixin,
+                      mixins.UpdateModelMixin,
                       mixins.DestroyModelMixin,
                       viewsets.GenericViewSet):
 
