@@ -28,4 +28,4 @@ class CartItem(TimeStampedModel):
 
     @property
     def owner(self):
-        return self.cart.user and self.cart.token
+        return self.cart.user or self.cart.token
