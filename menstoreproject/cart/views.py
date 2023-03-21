@@ -26,7 +26,7 @@ class CartItemViewSet(mixins.CreateModelMixin,
 
     queryset = CartItem.objects.all()
     serializer_class = CartListSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwner]
+    permission_classes = [IsOwner]
 
     def perform_create(self, serializer):
         serializer.save(cart=self.request.cart)
