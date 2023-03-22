@@ -139,8 +139,6 @@ STATICFILES_DIRS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'authentication.backends.EmailBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
     ]
 
@@ -156,7 +154,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
