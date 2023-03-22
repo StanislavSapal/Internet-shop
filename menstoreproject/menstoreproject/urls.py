@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import HomeView
+from .views import HomeView, signup_redirect_view, test_view, signup
 
 
 urlpatterns = [
@@ -30,6 +30,9 @@ urlpatterns = [
     path('', include('catalog.urls')),
     path('', include('cart.urls')),
     path('', include('order.urls')),
+    path("", include("allauth.urls")),
+    path('social/signup/', signup, name='signup_redirect'),
+    path('test/', test_view, name='test_path')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

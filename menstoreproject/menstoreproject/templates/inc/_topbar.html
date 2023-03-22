@@ -1,3 +1,4 @@
+{% load socialaccount %}
 <div class="container-fluid">
     <div class="row bg-secondary py-1 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
@@ -16,6 +17,12 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <button class="dropdown-item" type="button">Sign in</button>
+                        <button class="dropdown-item" type="button">
+                            <a href="{% provider_login_url 'google'%}?next=/">
+                                <i class="fab fa-google"></i>
+                                Login with Google
+                            </a>
+                        </button>
                         <button class="dropdown-item" type="button">Sign up</button>
                         <button class="dropdown-item" type="button">Register</button>
                     </div>
