@@ -3,6 +3,7 @@ from .forms import OrderForm
 from cart.models import Cart
 from django.shortcuts import render
 from django.db.models import F, Sum
+from django.contrib import messages
 
 
 class OrderConfirmationView(FormView):
@@ -28,4 +29,5 @@ class OrderConfirmationView(FormView):
 
 
 def successful_order_page_view(request):
+    messages.success(request, 'Замовлення підтверджено.')
     return render(request, 'order/successful_order.html')
