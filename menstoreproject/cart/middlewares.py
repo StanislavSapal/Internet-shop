@@ -15,7 +15,7 @@ def generate_token():
 
 
 def get_cart_by_token(token):
-    cart = Cart.objects.get(token=token, status=Cart.StatusChoices.OPEN)
+    cart = Cart.objects.filter(token=token, status=Cart.StatusChoices.OPEN).last()
     return cart
 
 

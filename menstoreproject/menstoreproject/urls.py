@@ -30,6 +30,8 @@ urlpatterns = [
     path('', include('catalog.urls')),
     path('', include('cart.urls')),
     path('', include('order.urls')),
+    path('', include('authentication.urls')),
+    path('', include("allauth.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

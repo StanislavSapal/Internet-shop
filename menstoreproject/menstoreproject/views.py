@@ -12,5 +12,3 @@ class HomeView(ListView):
         context['categories'] = Category.objects.annotate(cnt=Count('product'))
         context['best_products'] = Product.objects.filter(top_seller=True)
         return context
-
-
