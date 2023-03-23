@@ -11,27 +11,21 @@
         </div>
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
-                        {% if request.user.is_authenticated %}
-                            Вітаємо, {{ user.username }}
-                        {% else %}
-                            My Account
-                        {% endif %}
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">
-                            <a class="h6" href="{% provider_login_url 'google'%}?next=/">
-                                <i class="fab fa-google"></i>
-                                Login with Google
-                            </a>
+                <div class="btn">
+                    {% if request.user.is_authenticated %}
+                        <button type="button">
+                        <a class="h5" href="{% url 'logout' %}">
+                            Logout
+                        </a>
                         </button>
-                        <button class="dropdown-item" type="button">
-                            <a class="h6" href="{% url 'logout' %}">
-                                Logout
-                            </a>
+                    {% else %}
+                        <button type="button">
+                        <a class="h5" href="{% provider_login_url 'google'%}?next=/">
+                            <i class="fab fa-google"></i>
+                            Login with Google
+                        </a>
                         </button>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="d-inline-flex align-items-center d-block d-lg-none">
