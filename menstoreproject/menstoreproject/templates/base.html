@@ -36,11 +36,21 @@
 {% include 'inc/_navbar.html' %}
 
 {% if messages %}
-<ul class="messages">
+<div class="messages col-lg-10">
     {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }}</li>
+        {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message|safe|escape }}
+                </div>
+            {% elif message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message|safe|escape }}
+                </div>
+        {% endif %}
     {% endfor %}
-</ul>
+</div>
 {% endif %}
 
 {% block content %}CONTENT{% endblock %}
