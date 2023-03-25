@@ -36,6 +36,11 @@ class ProductImageAdmin(admin.ModelAdmin):
     get_image.short_description = 'Фото'
 
 
+@admin.register(ProductSize)
+class ProductSizeAdmin(admin.ModelAdmin):
+    list_display = ('size',)
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)

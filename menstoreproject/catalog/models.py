@@ -20,6 +20,18 @@ class Category(models.Model):
         ordering = ['title']
 
 
+class ProductSize(models.Model):
+    size = models.CharField(max_length=5, verbose_name='Розмір')
+
+    def __str__(self):
+        return self.size
+
+    class Meta:
+        verbose_name = 'Розмір товару'
+        verbose_name_plural = 'Розміри товарів'
+        ordering = ['id']
+
+
 class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name='Назва товару')
     slug = models.SlugField(unique=True, blank=True, null=True)
@@ -29,6 +41,7 @@ class Product(models.Model):
     material = models.CharField(max_length=50, verbose_name='Матеріал')
     quantity = models.IntegerField()
     top_seller = models.BooleanField(default=False, verbose_name='Топ продажів')
+    size = models.ManyToManyField(ProductSize, verbose_name="Розмір")
 
     def get_absolute_url(self):
         return reverse('view_product', kwargs={'slug': self.slug})
@@ -51,3 +64,7 @@ class ProductImage(models.Model):
 
     def get_img(self):
         return self.image
+
+    class Meta:
+        verbose_name = 'Фото товару'
+        verbose_name_plural = 'Фото товарів'

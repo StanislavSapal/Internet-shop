@@ -46,6 +46,19 @@
 
                 <p class="mb-4">{{ product_item.description }}</p>
                 <h4 class="font-weight-semi-bold mb-4"> Матеріал: {{ product_item.material }} </h4>
+                    <div class="d-flex mb-3">
+                        {% if product_item.size.all %}
+                        <strong class="text-dark mr-3">Sizes:</strong>
+                        <form>
+                            {% for size in product_item.size.all %}
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="{{ size.id }}" name="size">
+                                <label class="custom-control-label" for="{{ size.id }}">{{ size }}</label>
+                            </div>
+                            {% endfor %}
+                        </form>
+                        {% endif %}
+                    </div>
                 <div id="{{ product_item.id }}" class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
