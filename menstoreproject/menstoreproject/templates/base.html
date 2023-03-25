@@ -35,6 +35,24 @@
 
 {% include 'inc/_navbar.html' %}
 
+{% if messages %}
+<div class="messages col-lg-10">
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message|safe|escape }}
+                </div>
+            {% elif message.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message|safe|escape }}
+                </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+
 {% block content %}CONTENT{% endblock %}
 
 {% include 'inc/_footer.html' %}
