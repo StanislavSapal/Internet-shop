@@ -1,9 +1,10 @@
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView
 from .forms import OrderForm
 from cart.models import Cart
 from django.shortcuts import render
 from django.db.models import F, Sum
 from django.contrib import messages
+from .models import Order
 
 
 class OrderConfirmationView(FormView):
@@ -31,3 +32,12 @@ class OrderConfirmationView(FormView):
 def successful_order_page_view(request):
     messages.success(request, 'Замовлення прийнято')
     return render(request, 'order/successful_order.html')
+
+
+class OrderList(ListView):
+    model = Order
+    template_name = 'order/user_orders.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        return Order.objects.filter(cart__user=self.request.user)
