@@ -65,7 +65,7 @@ $(document).ready(function() {
             contentType:'application/json',
             dataType: 'json',
             error: function(result){
-                alert(result)
+                alert("Обов'язково вкажіть розмір товару")
             },
             success: function(result) {
                 alert('Товар додано до кошика')
