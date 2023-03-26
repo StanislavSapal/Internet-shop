@@ -41,7 +41,7 @@ class Product(models.Model):
     material = models.CharField(max_length=50, verbose_name='Матеріал')
     quantity = models.IntegerField()
     top_seller = models.BooleanField(default=False, verbose_name='Топ продажів')
-    size = models.ManyToManyField(ProductSize, verbose_name="Розмір")
+    size = models.ManyToManyField(ProductSize, blank=True, verbose_name="Розмір")
 
     def get_absolute_url(self):
         return reverse('view_product', kwargs={'slug': self.slug})
