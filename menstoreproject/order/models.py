@@ -11,9 +11,9 @@ def generate_order_number():
 
 class Order(TimeStampedModel):
     class StatusChoices(models.TextChoices):
-        DONE = 'Виконано'
-        IN_PROGRESS = 'Виконується'
-        CANCELLED = 'Скасовано'
+        done = 'Виконано'
+        in_progress = 'Виконується'
+        cancelled = 'Скасовано'
 
     cart = models.ForeignKey('cart.Cart', on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
@@ -24,7 +24,7 @@ class Order(TimeStampedModel):
     address = models.CharField(max_length=250)
     email = models.EmailField(blank=True)
     order_number = models.CharField(max_length=11, unique=True)
-    status = models.CharField(max_length=11, choices=StatusChoices.choices, default=StatusChoices.IN_PROGRESS)
+    status = models.CharField(max_length=11, choices=StatusChoices.choices, default=StatusChoices.in_progress)
     comment = models.TextField(blank=True, null=True, max_length=500)
 
     def save(self, *args, **kwargs):

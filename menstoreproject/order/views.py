@@ -24,7 +24,7 @@ class OrderConfirmationView(FormView):
     def form_valid(self, form):
         cart = self.request.cart
         form.save()
-        cart.status = Cart.StatusChoices.CLOSED
+        cart.status = Cart.StatusChoices.closed
         cart.save()
         return super(OrderConfirmationView, self).form_valid(form)
 
