@@ -7,7 +7,13 @@ class CartListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CartItem
-        fields = ('id', 'cart', 'product', 'quantity')
+        fields = ('id', 'cart', 'product', 'quantity', 'size')
+
+    def validate(self, attrs):
+        product = attrs['product']
+        if product.size.all() and not attrs['size']:
+            raise serializers.ValidationError()
+        return attrs
 
 
 class CartSerializer(serializers.ModelSerializer):

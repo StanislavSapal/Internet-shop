@@ -35,14 +35,25 @@ $(document).ready(function() {
         product_quantity_input.attr('value', new_quantity)
     });
 
+    $('label[class*=size_choice_label]').click(function() {
+        let size_div = $(this).parent().parent();
+        let selected_size = $(this).text();
+        size_div.attr('value', selected_size);
+        let size_div_value = size_div.attr('value');
+    });
+
     $('button[class*=add_to_cart_button]').click(function() {
         let url = '/api/v1/cartitems/';
         let minus_plus_add_div = $(this).parent();
+        let product_info_and_options_div = minus_plus_add_div.parent();
+        let size_div = product_info_and_options_div.find('div.size_div');
+        size = size_div.attr('value');
         let product_id = minus_plus_add_div.attr('id');
         let product_quantity_input = minus_plus_add_div.find('input.quantity_input');
         let product_quantity = Number(product_quantity_input.attr('value'));
         let data = JSON.stringify({"product": product_id,
-                                   "quantity": product_quantity});
+                                   "quantity": product_quantity,
+                                   "size": size});
 
         $.ajax({
             url: url,
@@ -54,7 +65,7 @@ $(document).ready(function() {
             contentType:'application/json',
             dataType: 'json',
             error: function(result){
-                alert(result)
+                alert("Обов'язково вкажіть розмір товару")
             },
             success: function(result) {
                 alert('Товар додано до кошика')

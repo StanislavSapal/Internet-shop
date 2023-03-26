@@ -5,7 +5,7 @@ import string
 
 
 def get_cart_by_user(user):
-    cart = Cart.objects.filter(user=user, status=Cart.StatusChoices.OPEN).last()
+    cart = Cart.objects.filter(user=user, status=Cart.StatusChoices.open).last()
     return cart
 
 
@@ -15,7 +15,7 @@ def generate_token():
 
 
 def get_cart_by_token(token):
-    cart = Cart.objects.filter(token=token, status=Cart.StatusChoices.OPEN).last()
+    cart = Cart.objects.filter(token=token, status=Cart.StatusChoices.open).last()
     return cart
 
 

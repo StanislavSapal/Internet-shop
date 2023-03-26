@@ -5,11 +5,11 @@ from menstoreproject.models import TimeStampedModel
 
 class Cart(TimeStampedModel):
     class StatusChoices(models.TextChoices):
-        OPEN = 'Open'
-        CLOSED = 'Closed'
+        open = 'Open'
+        closed = 'Closed'
 
     user = models.ForeignKey('authentication.User', on_delete=models.CASCADE, blank=True, null=True)
-    status = models.CharField(max_length=10, choices=StatusChoices.choices, default=StatusChoices.OPEN)
+    status = models.CharField(max_length=10, choices=StatusChoices.choices, default=StatusChoices.open)
     token = models.CharField(blank=True, null=True, max_length=16, unique=True)
 
     @property
@@ -21,6 +21,7 @@ class CartItem(TimeStampedModel):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
     product = models.ForeignKey('catalog.Product', on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField()
+    size = models.CharField(max_length=5, blank=True, null=True, verbose_name='Розмір')
 
     @property
     def total_item_price(self):

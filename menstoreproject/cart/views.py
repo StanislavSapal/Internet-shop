@@ -1,6 +1,5 @@
 from django.views.generic import DetailView
 from rest_framework import viewsets, mixins
-from rest_framework import permissions
 from .permissions import IsOwner
 from .serializers import *
 

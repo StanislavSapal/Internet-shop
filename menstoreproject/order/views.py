@@ -24,7 +24,7 @@ class OrderConfirmationView(FormView):
     def form_valid(self, form):
         cart = self.request.cart
         form.save()
-        cart.status = Cart.StatusChoices.CLOSED
+        cart.status = Cart.StatusChoices.closed
         cart.save()
         return super(OrderConfirmationView, self).form_valid(form)
 
@@ -40,4 +40,4 @@ class OrderList(ListView):
     context_object_name = 'orders'
 
     def get_queryset(self):
-        return Order.objects.filter(cart__user=self.request.user)
+        return Order.objects.filter(cart__user=self.request.user).order_by('-created')
