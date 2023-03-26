@@ -21,6 +21,7 @@ class CartItem(TimeStampedModel):
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
     product = models.ForeignKey('catalog.Product', on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField()
+    size = models.CharField(max_length=5, blank=True, null=True, verbose_name='Розмір')
 
     @property
     def total_item_price(self):
