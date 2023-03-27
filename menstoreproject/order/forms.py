@@ -5,6 +5,16 @@ from django import forms
 
 
 class OrderForm(forms.ModelForm):
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'autocomplete': 'off',
+            'class': 'form-control',
+            'placeholder': 'example@mail.com',
+            'required': 'required'
+        }),
+        error_messages={'invalid': 'Введіть коректну email адресу'}
+    )
+
     class Meta:
         model = Order
         fields = ['cart', 'first_name', 'last_name', 'phone', 'email',  'town', 'region', 'address']
@@ -36,11 +46,3 @@ class OrderForm(forms.ModelForm):
         if not re.match(r'^\+380\d{9}$', phone):
             raise ValidationError('Номер телефону має починатися з "+380"!')
         return phone
-
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if not re.match("\S+@\S+\.\S+", email):
-            raise forms.ValidationError(
-                code="invalid",
-                message="Введіть email коректно"
-            )

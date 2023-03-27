@@ -1,21 +1,12 @@
 from django.db import models
 from menstoreproject.models import TimeStampedModel
 import random
-from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
 
 
 def generate_order_number():
     nums = [random.randint(0, 9) for _ in range(9)]
     order_number = '{}{}{} {}{}{} {}{}{}'.format(*nums)
     return order_number
-
-
-def email_validator(value):
-    try:
-        validate_email(value)
-    except ValidationError:
-        raise ValidationError('Введіть коректний email')
 
 
 class Order(TimeStampedModel):
@@ -31,7 +22,7 @@ class Order(TimeStampedModel):
     town = models.CharField(max_length=250)
     region = models.CharField(max_length=250)
     address = models.CharField(max_length=250)
-    email = models.EmailField(blank=True, validators=[email_validator])
+    email = models.EmailField(blank=True)
     order_number = models.CharField(max_length=11, unique=True)
     status = models.CharField(max_length=11, choices=StatusChoices.choices, default=StatusChoices.in_progress)
     comment = models.TextField(blank=True, null=True, max_length=500)
