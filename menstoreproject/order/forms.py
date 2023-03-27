@@ -37,3 +37,10 @@ class OrderForm(forms.ModelForm):
             raise ValidationError('Номер телефону має починатися з "+380"!')
         return phone
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not re.match("\S+@\S+\.\S+", email):
+            raise forms.ValidationError(
+                code="invalid",
+                message="Введіть email коректно"
+            )
