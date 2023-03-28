@@ -19,25 +19,36 @@
                 </div>
             </form>
         </div>
-        <div class="col-lg-4 col-6 text-right">
+
+        <div class="col-lg-2 col-6 text-right">
+            {% if request.user.is_authenticated %}
+            {% if user.first_name %}
+            <h6> Вітаємо, {{ user.first_name }}!</h6>
+            {% else %}
+            <h6> Вітаємо, {{ user.username }}!</h6>
+            {% endif %}
+            {% endif %}
+        </div>
+
+        <div class="col-lg-2 col-6 text-left">
             <div class="d-inline-flex align-items-center">
                 <div class="input-group-append">
-                <div class="btn">
-                    {% if request.user.is_authenticated %}
+                    <div class="btn">
+                        {% if request.user.is_authenticated %}
                         <a href="{% url 'logout' %}">
                             <button class="h5 btn btn-primary" type="button">
-                            Вийти
+                                Вийти
                             </button>
                         </a>
-                    {% else %}
+                        {% else %}
                         <a href="{% provider_login_url 'google'%}?next=/">
                             <button class="btn btn-primary" type="button">
-                            <i class="fab fa-google"></i>
-                            Увійти через Google
+                                <i class="fab fa-google"></i>
+                                Увійти через Google
                             </button>
                         </a>
-                    {% endif %}
-                </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

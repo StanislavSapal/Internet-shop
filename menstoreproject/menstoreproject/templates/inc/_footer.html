@@ -16,11 +16,13 @@
                     <h5 class="text-secondary text-uppercase mb-4">Швидкий доступ</h5>
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-secondary mb-2" href="{% url 'home' %}"><i class="fa fa-angle-right mr-2"></i>Головна</a>
-                        <a class="text-secondary mb-2" href="{% url 'list_of_products' %}"><i class="fa fa-angle-right mr-2"></i>Каталог</a>
+                        <a class="text-secondary mb-2" href="{% url 'list_of_products' %}"><i
+                                class="fa fa-angle-right mr-2"></i>Каталог</a>
                         <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Контакти</a>
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
+                    {% if request.user.is_authenticated %}
                     <h5 class="text-secondary text-uppercase mb-4">Мій акаунт</h5>
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Мій профіль</a>
@@ -28,6 +30,7 @@
                         <a class="text-secondary mb-2" href="{% url 'orders' %}"><i class="fa fa-angle-right mr-2"></i>Мої
                             замовлення</a>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
