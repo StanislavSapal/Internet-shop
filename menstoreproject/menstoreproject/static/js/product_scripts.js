@@ -16,11 +16,6 @@ $(document).ready(function() {
       return cookieValue;
     }
 
-    function changeCartitemQuantityOnNavbar(newValue) {
-        let cart_item_quantity_span = $('span[class*=number_of_cartitems]');
-        cart_item_quantity_span.text(newValue);
-    }
-
     $('button[class*=minus_button]').click(function() {
         let plus_minus_buttons_div = $(this).parent().parent();
         let product_quantity_input = plus_minus_buttons_div.find('input.quantity_input');
@@ -59,6 +54,7 @@ $(document).ready(function() {
         let cart_item_quantity_span = $('span[class*=number_of_cartitems]');
         let cart_item_quantity = Number(cart_item_quantity_span.text());
         let new_cart_item_quantity = cart_item_quantity + 1;
+        cart_item_quantity_span.text(new_cart_item_quantity)
         let data = JSON.stringify({"product": product_id,
                                    "quantity": product_quantity,
                                    "size": size});
@@ -76,7 +72,6 @@ $(document).ready(function() {
                 alert("Обов'язково вкажіть розмір товару")
             },
             success: function(result) {
-                changeCartitemQuantityOnNavbar(new_cart_item_quantity);
                 alert('Товар додано до кошика')
             }
         });

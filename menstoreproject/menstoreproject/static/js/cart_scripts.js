@@ -16,16 +16,12 @@ $(document).ready(function() {
       return cookieValue;
     }
 
-    function changeCartitemQuantityOnNavbar(newValue) {
-        let cart_item_quantity_span = $('span[class*=number_of_cartitems]');
-        cart_item_quantity_span.text(newValue);
-    }
-
     $('button[class*=delete_button]').click(function() {
         let url = '/api/v1/cartitems/';
         let cart_item_quantity_span = $('span[class*=number_of_cartitems]');
         let cart_item_quantity = Number(cart_item_quantity_span.text());
         let new_cart_item_quantity = cart_item_quantity - 1;
+        cart_item_quantity_span.text(new_cart_item_quantity);
         let cart_item = $(this).closest('tr');
         let cart_item_id = cart_item.attr('id');
         $.ajax({
@@ -42,7 +38,6 @@ $(document).ready(function() {
             },
             success: function(result) {
                 changeTotalCartSum(cart_item);
-                changeCartitemQuantityOnNavbar(new_cart_item_quantity);
                 $(cart_item).remove()
             }
         });
