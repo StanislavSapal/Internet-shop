@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.db.models import F, Sum
 from django.contrib import messages
 from .models import Order
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class OrderConfirmationView(FormView):
@@ -34,7 +35,7 @@ def successful_order_page_view(request):
     return render(request, 'order/successful_order.html')
 
 
-class OrderList(ListView):
+class OrderList(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'order/user_orders.html'
     context_object_name = 'orders'

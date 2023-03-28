@@ -6,9 +6,11 @@
 
 
 {% block content %}
+{% load static %}
 <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-lg-12 table-responsive mb-5">
+            {% if orders %}
             <table class="table table-light table-borderless table-hover text-center mb-0">
                 <thead class="thead-dark">
                 <tr>
@@ -60,6 +62,30 @@
                 {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+            <div class="col-lg-6 mb-5">
+                <div class="order_empty">
+                    <div class="order_empty__image" style="display: flex; justify-content: right;">
+                        <img src="{% static 'img/empty_order-list.png' %}" width="300" height="350"
+                             alt="нема замовлень зображення" style="overflow-clip-margin: content-box;">
+                    </div>
+                    <div class="order_empty__text" style="display: flex; justify-content: right;">
+                        <h4>У вас немає замовлень</h4>
+                    </div>
+                    <div class="order_empty__text" style="display: flex; justify-content: right; padding-right: 40px;">
+                        <p>Але це можна виправити</p>
+                    </div>
+                    <div class="order_empty__button"
+                         style="display: flex; justify-content: right; padding-right: 50px;">
+                        <button onclick="window.location.href = '{% url 'list_of_products' %}';" class="btn btn-primary
+                        font-weight-bold py-3">Перейти в магазин
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endif %}
         </div>
     </div>
 </div>
