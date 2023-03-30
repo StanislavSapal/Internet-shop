@@ -10,9 +10,10 @@ class CartListSerializer(serializers.ModelSerializer):
         fields = ('id', 'cart', 'product', 'quantity', 'size')
 
     def validate(self, attrs):
-        product = attrs['product']
-        if product.size.all() and not attrs['size']:
-            raise serializers.ValidationError()
+        if 'product' in attrs:
+            product = attrs['product']
+            if product.size.all() and not attrs['size']:
+                raise serializers.ValidationError()
         return attrs
 
 
