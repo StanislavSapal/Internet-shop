@@ -51,6 +51,10 @@ $(document).ready(function() {
         let product_id = minus_plus_add_div.attr('id');
         let product_quantity_input = minus_plus_add_div.find('input.quantity_input');
         let product_quantity = Number(product_quantity_input.attr('value'));
+        let cart_item_quantity_span = $('span[class*=number_of_cartitems]');
+        let cart_item_quantity = Number(cart_item_quantity_span.text());
+        let new_cart_item_quantity = cart_item_quantity + 1;
+        cart_item_quantity_span.text(new_cart_item_quantity)
         let data = JSON.stringify({"product": product_id,
                                    "quantity": product_quantity,
                                    "size": size});
