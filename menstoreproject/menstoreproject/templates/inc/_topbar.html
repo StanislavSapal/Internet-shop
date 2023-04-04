@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left">
-            <form action="{% url 'search-products' %}" method="get">
+            <form action="{% url 'search' %}" method="get">
                 {% csrf_token %}
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Пошук товарів">

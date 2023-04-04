@@ -20,7 +20,7 @@ class ProductsView(ListView):
             return Product.objects.all()
 
 
-class ProductSearchView(ListView):
+class SearchView(ListView):
     model = Product
     template_name = 'catalog/product_list.html'
     context_object_name = 'products'
