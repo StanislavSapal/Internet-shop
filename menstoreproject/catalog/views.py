@@ -18,3 +18,13 @@ class ProductsView(ListView):
             return Product.objects.filter(category__slug=self.kwargs['category_slug'])
         else:
             return Product.objects.all()
+
+
+class SearchView(ListView):
+    model = Product
+    template_name = 'catalog/product_list.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Product.objects.filter(name__icontains=query)
