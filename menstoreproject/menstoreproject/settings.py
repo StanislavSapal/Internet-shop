@@ -161,6 +161,14 @@ LOGOUT_REDIRECT_URL = '/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+EMAIL_HOST = 'smtp.ukr.net'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'sapalstanislav@ukr.net'
+EMAIL_HOST_PASSWORD = 'mQVprUoAHY3Juqz9'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {

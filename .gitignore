@@ -164,3 +164,4 @@ id_rsa
 .editorconfig
 
 media/
+static/
