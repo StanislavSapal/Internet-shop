@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import HomeView
+from .views import HomeView, ContactView
 
 
 urlpatterns = [
@@ -27,6 +27,7 @@ urlpatterns = [
     path("ckeditor/", include('ckeditor_uploader.urls')),
     path("api/v1/", include('cart.urls')),
     path('', HomeView.as_view(), name='home'),
+    path('contact/', ContactView.as_view(), name='contact'),
     path('', include('catalog.urls')),
     path('', include('cart.urls')),
     path('', include('order.urls')),
