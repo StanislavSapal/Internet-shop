@@ -1,4 +1,9 @@
+import requests
+from django.conf import settings
 from django.views.generic import FormView, ListView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .forms import OrderForm
 from cart.models import Cart
 from django.shortcuts import render
@@ -53,3 +58,26 @@ class OrderList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Order.objects.filter(cart__user=self.request.user).order_by('-created')
+
+
+class NovaPoshtaApiView(APIView):
+    def get(self, request, format=None):
+        url = settings.NOVA_POSHTA_API
+        payload = {
+            "apiKey": settings.NOVA_POSHTA_API_KEY,
+            "modelName": "Address",
+            "calledMethod": "getSettlements",
+            "methodProperties": {
+                "Page": "1",
+                "Warehouse": "1",
+                "FindByString": "Покровське",
+                "Limit": "20"
+            }
+        }
+
+        response = requests.post(url, json=payload)
+        data = list()
+        for item in response.json()['data']:
+            data.append(f'<option value="{item["Ref"]}">{item["Description"]}</option>')
+
+        return Response(data)
