@@ -262,3 +262,6 @@ CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+NOVA_POSHTA_API = 'https://api.novaposhta.ua/v2.0/json/'
+NOVA_POSHTA_API_KEY = '54779737ef5daf3a52dc763416dc139d'
