@@ -35,7 +35,7 @@
                         {% for item in order.cart.cartitem_set.all %}
                         <p align="left">
                             <a class="h6 text-decoration-none text-truncate"
-                               href="{{ item.product.get_absolute_url }}">{{ item.product|truncatechars_html:35 }}
+                               href="{{ item.product.get_absolute_url }}">{{ item.product|truncatewords_html:6 }}
                             </a>
                         </p>
                         {% endfor %}

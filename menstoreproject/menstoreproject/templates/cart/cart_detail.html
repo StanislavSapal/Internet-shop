@@ -36,8 +36,8 @@
                 <tbody class="align-middle" id="{{ object.id }}">
                 {% for cart_item in cart_items %}
                 <tr id="{{ cart_item.id }}">
-                    <td class="align-middle"><img src="" alt="" style="width: 50px;">
-                        {{ cart_item.product.name|truncatechars_html:30 }}
+                    <td class="align-middle text-left"><img src="" alt="" style="width: 50px;">
+                        {{ cart_item.product.name|truncatewords_html:5 }}
                     </td>
                     <td class="align-middle">{{ cart_item.size }}</td>
                     <td class="align-middle price_td">{{ cart_item.product.price }} грн.</td>

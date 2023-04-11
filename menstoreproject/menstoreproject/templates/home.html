@@ -54,22 +54,18 @@
             </div>
         </div>
         <div class="col-lg-4">
+            {% for item in selected_products %}
             <div class="product-offer mb-30" style="height: 200px;">
-                <img class="img-fluid" src="img/offer-1.jpg" alt="">
+                {% for image_object in item.productimage_set.all %}
+                <img src="{{ image_object.image.url }}" alt="">
+                {% endfor %}
                 <div class="offer-text">
-                    <h6 class="text-white text-uppercase">Save 20%</h6>
-                    <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-primary">Shop Now</a>
+                    <h6 class="text-white text-uppercase">Спеціальна пропозиція</h6>
+                    <h3 class="text-white mb-3">{{ item.name|truncatewords_html:4 }}</h3>
+                    <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Перейти до товару</a>
                 </div>
             </div>
-            <div class="product-offer mb-30" style="height: 200px;">
-                <img class="img-fluid" src="img/offer-2.jpg" alt="">
-                <div class="offer-text">
-                    <h6 class="text-white text-uppercase">Save 20%</h6>
-                    <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-primary">Shop Now</a>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -129,18 +125,11 @@
                 </div>
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href="{{ item.get_absolute_url }}">
-                        {{ item.name|truncatechars_html:25 }}</a>
+                        {{ item.name|truncatewords_html:4 }}</a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
                         <h5>{{ item.price|safe }} грн.</h5>
                     </div>
-                    <div class="d-flex align-items-center justify-content-center mb-1">
-                        <small class="fa fa-star text-primary mr-1"></small>
-                        <small class="fa fa-star text-primary mr-1"></small>
-                        <small class="fa fa-star text-primary mr-1"></small>
-                        <small class="fa fa-star text-primary mr-1"></small>
-                        <small class="fa fa-star text-primary mr-1"></small>
-                        <small>(99)</small>
-                    </div>
+                    <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Перейти до товару</a>
                 </div>
             </div>
         </div>
