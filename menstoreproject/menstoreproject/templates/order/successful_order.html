@@ -2,5 +2,19 @@
 {% load static %}
 
 {% block content %}
-<h1>Вітаємо, ваше замовлення прийнято!</h1>
+<div class="col-lg-6 mb-5">
+                <div class="successful_order">
+                    <div class="successful_order__image" style="display: flex; justify-content: center;">
+                        <img src="{% static 'img/success-image.png' %}" width="350" height="350"
+                             alt="нема замовлень зображення" style="overflow-clip-margin: content-box;">
+                    </div>
+                    <div class="successful_order__button"
+                         style="display: flex; justify-content: center; padding-right: 10px; padding-top: 30px;">
+                        <button onclick="window.location.href = '{% url 'list_of_products' %}';" class="btn btn-primary
+                        font-weight-bold py-3">
+                            Перейти в магазин
+                        </button>
+                    </div>
+                </div>
+            </div>
 {% endblock %}
