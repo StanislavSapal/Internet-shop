@@ -14,6 +14,7 @@ class HomeView(ListView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.annotate(cnt=Count('product'))
         context['best_products'] = Product.objects.filter(top_seller=True)
+        context['selected_products'] = Product.objects.filter(selected=True)
         return context
 
 
