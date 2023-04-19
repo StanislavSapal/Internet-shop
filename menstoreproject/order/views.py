@@ -6,7 +6,7 @@ from django.db.models import F, Sum
 from django.contrib import messages
 from .models import Order
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .tasks import send_order_info_email_task
+from django.core.mail import send_mail
 
 
 class OrderConfirmationView(FormView):
@@ -30,13 +30,22 @@ class OrderConfirmationView(FormView):
         cart.save()
         if self.request.user.is_authenticated:
             order = Order.objects.filter(cart__user=self.request.user).last()
+            order_info_message = f"Доброго дня, {order.first_name}. Ви зробили замовлення в магазині Menstore." \
+                                 f" Ваш номер замовлення {order.order_number}. Замовлення буде відправлене завтра. " \
+                                 f"Деталі за телефоном +380990288708"
+
         else:
-            order = Order.objects.filter(cart__token=self.request.session.token).last()
-        order_info_message = f"Доброго дня, {order.first_name}. Ви зробили замовлення в магазині Menstore." \
-                             f" Ваш номер замовлення {order.order_number}. Замовлення буде відправлене завтра. " \
-                             f"Деталі за телефоном +380990288708"
-        send_order_info_email_task.delay(
-            order.email, order_info_message
+            order = Order.objects.filter(cart__token=self.request.session['token']).last()
+            order_info_message = f"Доброго дня! Ви зробили замовлення в магазині Menstore." \
+                                 f" Ваш номер замовлення {order.order_number}. Замовлення буде відправлене завтра. " \
+                                 f"Деталі за телефоном +380990288708"
+
+        send_mail(
+            'ЗАМОВЛЕННЯ ПРИЙНЯТО',
+            f"\t{order_info_message}\n\n",
+            'sapalstanislav@ukr.net',
+            [order.email],
+            fail_silently=False,
         )
         return super(OrderConfirmationView, self).form_valid(form)
 
