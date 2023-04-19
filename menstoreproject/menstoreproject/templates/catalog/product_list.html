@@ -44,7 +44,7 @@
                 </div>
                 <div class="text-center py-4 ">
                     <a class="card-title h6 text-decoration-none p-2" href="{{ item.get_absolute_url }}">
-                        {{ item.name|truncatechars_html:45 }}
+                        {{ item.name|truncatewords_html:6 }}
                     </a>
                     <h5 class="card-text mb-4">{{ item.price|safe }} грн.</h5>
                     <a href="{{ item.get_absolute_url }}" class="btn btn-primary" style="object-fit:contain;">Перейти до

@@ -9,9 +9,8 @@ __pycache__/
 settings_pycharm.py
 firebase_key.json
 contractors-dev-accf2a452eaa.json
-# Logs
-logs
-*.log
+
+
 *.pyc
 npm-debug.log*
 /.idea
@@ -165,3 +164,6 @@ id_rsa
 
 media/
 static/
+
+local_settings.py
+prod_settings.py

@@ -42,6 +42,7 @@ class Product(models.Model):
     quantity = models.IntegerField()
     top_seller = models.BooleanField(default=False, verbose_name='Топ продажів')
     size = models.ManyToManyField(ProductSize, blank=True, verbose_name="Розмір")
+    selected = models.BooleanField(default=False, verbose_name='На банері')
 
     def get_absolute_url(self):
         return reverse('view_product', kwargs={'slug': self.slug})
@@ -58,6 +59,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    is_main = models.BooleanField(default=False, verbose_name='Головна')
 
     def get_absolute_url(self):
         return reverse('view_product', kwargs={'pk': self.pk})
