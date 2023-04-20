@@ -21,11 +21,14 @@ class CartPageView(DetailView):
 class CartItemViewSet(mixins.CreateModelMixin,
                       mixins.UpdateModelMixin,
                       mixins.DestroyModelMixin,
+                      mixins.ListModelMixin,
                       viewsets.GenericViewSet):
 
-    queryset = CartItem.objects.all()
     serializer_class = CartListSerializer
     permission_classes = [IsOwner]
+
+    def get_queryset(self):
+        return CartItem.objects.filter(cart=self.request.cart)
 
     def perform_create(self, serializer):
         serializer.save(cart=self.request.cart)

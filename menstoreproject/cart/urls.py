@@ -3,7 +3,7 @@ from .views import *
 from rest_framework import routers
 
 router = routers.SimpleRouter()
-router.register(r'cartitems', CartItemViewSet)
+router.register(r'cartitems', CartItemViewSet, basename='cartitem')
 router.register(r'cart', CartViewSet)
 
 urlpatterns = [

@@ -69,20 +69,58 @@ $(document).ready(function() {
 
         $.ajax({
             url: url,
-            type: 'POST',
-            data: data,
+            type: 'GET',
             headers: {
                 "X-CSRFToken": getCookie("csrftoken"),
             },
             contentType:'application/json',
             dataType: 'json',
-            error: function(result){
-                alert("Обов'язково вкажіть розмір товару")
-            },
             success: function(result) {
-                changeCartitemQuantityOnNavbar(new_cart_item_quantity);
-                setTimeout(successAddToCartMessage, 50);
+                let cart_item_found = false;
+                result.forEach(function(item) {
+                    if (item.product == product_id && item.size == size) {
+                        cart_item_found = true;
+                        if (cart_item_found) {
+                            let cart_item_id = item.id;
+                            let new_quantity = item.quantity + product_quantity;
+                            let update_data = JSON.stringify({"quantity": new_quantity});
+                            $.ajax({
+                                url: url + cart_item_id + '/',
+                                type: 'PATCH',
+                                data: update_data,
+                                headers: {
+                                    "X-CSRFToken": getCookie("csrftoken"),
+                                },
+                                contentType:'application/json',
+                                dataType: 'json',
+                                success: function(result) {
+                                    setTimeout(successAddToCartMessage, 50);
+                                }
+                            });
+
+                        }
+                    }
+                });
+                if (!cart_item_found) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: data,
+                        headers: {
+                            "X-CSRFToken": getCookie("csrftoken"),
+                        },
+                        contentType:'application/json',
+                        dataType: 'json',
+                        error: function(result){
+                            alert("Обов'язково вкажіть розмір товару")
+                        },
+                        success: function(result) {
+                            changeCartitemQuantityOnNavbar(new_cart_item_quantity);
+                            setTimeout(successAddToCartMessage, 50);
+                        }
+                    });
+                }
             }
         });
-    });
+    })
 });
