@@ -39,6 +39,21 @@ $(document).ready(function() {
             success: function(result) {
                 changeTotalCartSum(cart_item);
                 $(cart_item).remove()
+
+                if (new_cart_item_quantity == 0) {
+                    let cart_value = $('div[class*=cart_value]');
+                    cart_value.html('<div class="col-lg-6 mb-5">\n' +
+                        '        <div class="cart_empty">\n' +
+                        '          <div class="cart_empty__image" style="display: flex; justify-content: right;">\n' +
+                        '            <img src="https://cdn-icons-png.flaticon.com/512/6533/6533808.png" width="300" height="300" alt="порожній кошик зображення" style="overflow-clip-margin: content-box;">\n' +
+                        '          </div>\n' +
+                        '          <div class="cart_empty__text" style="display: flex; justify-content: right;">\n' +
+                        '            <h4>Ваш кошик порожній</h4>\n' +
+                        '          </div>\n' +
+                        '        </div>\n' +
+                        '      </div>'
+                    );
+                }
             }
         });
     });
