@@ -55,10 +55,19 @@ def successful_order_page_view(request):
     return render(request, 'order/successful_order.html')
 
 
-class OrderList(LoginRequiredMixin, ListView):
+class UserOrderList(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'order/user_orders.html'
     context_object_name = 'orders'
 
     def get_queryset(self):
         return Order.objects.filter(cart__user=self.request.user).order_by('-created')
+
+
+class OrderList(LoginRequiredMixin, ListView):
+    model = Order
+    template_name = 'order/all_orders.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        return Order.objects.all().order_by('-created')

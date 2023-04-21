@@ -18,7 +18,7 @@
                         <a class="text-secondary mb-2" href="{% url 'home' %}"><i class="fa fa-angle-right mr-2"></i>Головна</a>
                         <a class="text-secondary mb-2" href="{% url 'list_of_products' %}"><i
                                 class="fa fa-angle-right mr-2"></i>Каталог</a>
-                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Контакти</a>
+                        <a class="text-secondary" href="{% url 'contact' %}"><i class="fa fa-angle-right mr-2"></i>Контакти</a>
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
@@ -27,7 +27,7 @@
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Мій профіль</a>
                         <a class="text-secondary mb-2" href="{% url 'cart' %}"><i class="fa fa-angle-right mr-2"></i>Кошик</a>
-                        <a class="text-secondary mb-2" href="{% url 'orders' %}"><i class="fa fa-angle-right mr-2"></i>Мої
+                        <a class="text-secondary mb-2" href="{% url 'user_orders' %}"><i class="fa fa-angle-right mr-2"></i>Мої
                             замовлення</a>
                     </div>
                     {% endif %}
