@@ -12,7 +12,7 @@ class CartPageView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cart_items'] = self.object.cartitem_set.all()
+        context['cart_items'] = self.object.cartitem_set.all().order_by('id')
         context['total_cart_sum'] = self.object.cartitem_set.aggregate(price_total=Sum(F('product__price') *
                                                                                        F('quantity')))
         return context
