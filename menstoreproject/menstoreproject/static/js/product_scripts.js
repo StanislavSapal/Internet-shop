@@ -16,9 +16,23 @@ $(document).ready(function() {
       return cookieValue;
     }
 
-    function changeCartitemQuantityOnNavbar(newValue) {
-        let cart_item_quantity_span = $('span[class*=number_of_cartitems]');
-        cart_item_quantity_span.text(newValue);
+    function changeCartitemQuantityOnNavbar() {
+        let url = '/api/v1/cartitems/';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            headers: {
+                "X-CSRFToken": getCookie("csrftoken"),
+            },
+            contentType:'application/json',
+            dataType: 'json',
+            success: function(result) {
+                let cart_item_quantity_span = $('span[class*=number_of_cartitems]');
+                let cart_item_quantity = result.length;
+                console.log(cart_item_quantity)
+                cart_item_quantity_span.text(cart_item_quantity);
+            }
+        })
     };
 
     $('button[class*=minus_button]').click(function() {
@@ -56,13 +70,10 @@ $(document).ready(function() {
         let minus_plus_add_div = $(this).parent();
         let product_info_and_options_div = minus_plus_add_div.parent();
         let size_div = product_info_and_options_div.find('div.size_div');
-        size = size_div.attr('value');
+        let size = size_div.attr('value');
         let product_id = minus_plus_add_div.attr('id');
         let product_quantity_input = minus_plus_add_div.find('input.quantity_input');
         let product_quantity = Number(product_quantity_input.attr('value'));
-        let cart_item_quantity_span = $('span[class*=number_of_cartitems]');
-        let cart_item_quantity = Number(cart_item_quantity_span.text());
-        let new_cart_item_quantity = cart_item_quantity + 1;
         let data = JSON.stringify({"product": product_id,
                                    "quantity": product_quantity,
                                    "size": size});
@@ -93,7 +104,7 @@ $(document).ready(function() {
                             contentType:'application/json',
                             dataType: 'json',
                             success: function(result) {
-                                setTimeout(successAddToCartMessage, 50);
+                                successAddToCartMessage();
                             }
                         });
                     }
@@ -112,8 +123,8 @@ $(document).ready(function() {
                             alert("Обов'язково вкажіть розмір товару")
                         },
                         success: function(result) {
-                            changeCartitemQuantityOnNavbar(new_cart_item_quantity);
-                            setTimeout(successAddToCartMessage, 50);
+                            changeCartitemQuantityOnNavbar();
+                            setTimeout(successAddToCartMessage, 100);
                         }
                     });
                 }
