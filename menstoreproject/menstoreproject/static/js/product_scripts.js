@@ -124,7 +124,7 @@ $(document).ready(function() {
                         },
                         success: function(result) {
                             changeCartitemQuantityOnNavbar();
-                            setTimeout(successAddToCartMessage, 100);
+                            setTimeout(successAddToCartMessage, 1000);
                         }
                     });
                 }
