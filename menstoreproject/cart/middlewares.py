@@ -1,12 +1,13 @@
 from .models import Cart
+from authentication.models import User
 from django.utils.functional import SimpleLazyObject
 import random
 import string
-from typing import Optional, Callable
+from typing import Optional
 from django.http import HttpRequest, HttpResponse
 
 
-def get_cart_by_user(user: str) -> Optional[Cart]:
+def get_cart_by_user(user: User) -> Optional[Cart]:
     cart = Cart.objects.filter(user=user, status=Cart.StatusChoices.open).last()
     return cart
 
@@ -30,7 +31,7 @@ def create_cart_for_anonymous_user(request: HttpRequest) -> Cart:
 
 
 class CartMiddleware:
-    def __init__(self, get_response: Callable[[HttpRequest], HttpResponse]) -> None:
+    def __init__(self, get_response):
         self.get_response = get_response
 
     def __call__(self, request: HttpRequest) -> HttpResponse:
