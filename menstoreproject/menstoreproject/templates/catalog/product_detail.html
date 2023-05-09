@@ -12,20 +12,20 @@
         <div class="col-lg-5 mb-30">
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
-
                     {% for image_object in product_item.productimage_set.all %}
-
                     <div class="carousel-item {% if forloop.first %} active {%endif%}">
                         <img class="d-block w-100" src="{{ image_object.image.url }}" alt="0">
                     </div>
                     {% endfor %}
                 </div>
+                {% if product_item.productimage_set.all.count > 1%}
                 <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                     <i class="fa fa-2x fa-angle-left text-dark"></i>
                 </a>
                 <a class="carousel-control-next" href="#product-carousel" data-slide="next">
                     <i class="fa fa-2x fa-angle-right text-dark"></i>
                 </a>
+                {% endif %}
             </div>
         </div>
 

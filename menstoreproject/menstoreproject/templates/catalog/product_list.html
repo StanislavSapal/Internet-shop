@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-{{ block.super }}
+Каталог {{ block.super }}
 {% endblock %}
 
 
@@ -34,12 +34,14 @@
 
                             {% endfor %}
                         </div>
+                        {% if item.productimage_set.all.count > 1%}
                         <a class="carousel-control-prev" href="#product-carousel-{{item.id}}" data-slide="prev">
                             <i class="fa fa-2x fa-angle-left text-dark"></i>
                         </a>
                         <a class="carousel-control-next" href="#product-carousel-{{item.id}}" data-slide="next">
                             <i class="fa fa-2x fa-angle-right text-dark"></i>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="text-center py-4 ">

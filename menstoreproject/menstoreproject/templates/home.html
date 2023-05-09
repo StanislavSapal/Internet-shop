@@ -44,7 +44,7 @@
                              style="object-fit: cover;">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
-                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Be Man</h1>
+                                <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Be a man</h1>
                                 <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
                                    href="{% url 'list_of_products' %}">Shop Now</a>
                             </div>
@@ -115,12 +115,14 @@
                             </div>
                             {% endfor %}
                         </div>
+                        {% if item.productimage_set.all.count > 1%}
                         <a class="carousel-control-prev" href="#product-carousel-{{item.id}}" data-slide="prev">
                             <i class="fa fa-2x fa-angle-left text-dark"></i>
                         </a>
                         <a class="carousel-control-next" href="#product-carousel-{{item.id}}" data-slide="next">
                             <i class="fa fa-2x fa-angle-right text-dark"></i>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="text-center py-4">
