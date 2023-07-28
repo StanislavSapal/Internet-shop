@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  menstore_postgres:
+    image: postgres:15
+    container_name: menstore_postgres
+    volumes:
+      - ~/.pg/pg_data/menstore:/var/lib/postgresql/data
+    env_file:
+      - .env
+  menstore_project:
+    image: menstore_docker:latest
+    container_name: menstore_container
+    depends_on:
+      - menstore_postgres
+    volumes:
+      - static_volume:/menstore/static
+      - media_volume:/menstore/media
+    env_file:
+      - .env
+    command: >
+      bash -c "python3 manage.py collectstatic --noinput && python3 manage.py migrate && gunicorn -b 0.0.0.0:8000 menstoreproject.wsgi:application"
+  nginx:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./docker/nginx
+    container_name: menstore_nginx
+    image: menstore_nginx
+    volumes:
+      - static_volume:/menstore/static
+      - media_volume:/menstore/media
+    depends_on:
+      - menstore_project
+    ports:
+      - "8080:80"
+
+
+volumes:
+  static_volume:
+  media_volume:
