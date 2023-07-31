@@ -22,4 +22,4 @@ RUN pip install -r requirements.txt
 
 USER menstore
 
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "menstoreproject.wsgi:application"]
+CMD ["gunicorn", "-b", "172.31.19.9:8000", "menstoreproject.wsgi:application"]
